@@ -1,0 +1,278 @@
+.page-header {
+    display: flex;
+    align-items: center;
+    max-width: 1300px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 22px 75px;
+    margin-bottom: 40px;
+}
+
+.logo {
+    cursor: pointer;
+}
+
+.film-card {
+    position: relative;
+    z-index: 1;
+    color: #eee5b5;
+    flex: 1;
+    margin-bottom: 20px;
+}
+
+.film-card__bg{
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+.film-card__bg::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: black;
+    opacity: 0.8;
+  }
+
+
+.film-card__bg img {
+    vertical-align: top;
+    width: 100%;
+    height: 100vh;
+    object-fit: cover;
+}
+
+.film-card__poster img {
+    vertical-align: top;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+@font-face {
+	font-family: Georgi; 
+	src: url(./fonts/Geologica-VariableFont_CRSV,SHRP,slnt,wght.ttf)
+}
+
+body {
+    font-family: Georgi;
+    font-size: 19px;
+    line-height: 23px;
+    min-width: 350px;
+    color: #000000;
+    background-color: #1c1b1d;
+    margin: 0;
+    position: relative;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.film-card__wrap {
+    max-width: 1300px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0 75px;
+}
+
+.film-card__info {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.film-card__poster {
+    border-radius: 5px;
+    overflow: hidden;
+    box-shadow: 0 0 8px 0 rgba(0,0,0,.4);
+    width: 218px;
+    height: 327px;
+}
+
+.film-card__desc {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    -webkit-box-flex: 1;
+    -ms-flex-positive: 1;
+    flex-grow: 1;
+}
+
+.film-card__title {
+    font-family: Georgi;
+    font-size: 32px;
+    line-height: 45px;
+    margin: 0 0 7px;
+}
+
+h2 {
+    display: block;
+    font-size: 1.5em;
+    margin-block-start: 0.83em;
+    margin-block-end: 0.83em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    font-weight: bold;
+}
+
+.film-card__buttons, .film-card__meta {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+}
+
+.film-card__meta {
+    font-size: 17px;
+    line-height: 20px;
+    margin: 0 0 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+p {
+    display: block;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+}
+
+.film-card__buttons {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    gap: 2em;
+}
+
+.film-card__buttons img {
+    width: 1.5em;
+}
+
+.btn {
+    font-family: Georgi;
+    font-size: 19px;
+    color: whitesmoke;
+    display: inline-block;
+    vertical-align: top;
+    border: 0;
+    cursor: pointer;
+    background: rgba(0,0,0,.70);
+    border-radius: 8px;
+    padding: 13px 30px;
+    display: flex;
+    align-items: center;
+}
+
+.page-footer {
+    position: relative;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 1;
+}
+
+content {
+    display:flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.start_match {
+    max-width: 1300px;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.start_description, .part_description{
+    font-family: Georgi;
+    font-size: 30px;
+    font-weight: bold;
+    color: white;
+    margin-bottom: 30vh;
+    margin-top: 5vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.part_description {
+    margin-bottom: 0;
+}
+
+.part_description p {
+    font-size: 19px;
+}
+
+.start_buttons, .part_buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2em;
+}
+
+.part_buttons {
+    align-items: normal;
+    flex-direction: row;
+    gap: 1em;
+}
+
+.part_buttons p {
+    margin: 0;
+    margin-left: 10px;
+    font-size: 15px;
+}
+
+.btn_green {
+    background: rgba(90, 207, 105, 0.7);
+}
+
+.btn_gray {
+    background: rgba(69, 52, 85, 0.7);
+}
+
+.btn_botton {
+    margin-top: 6em;
+}
+
+.genre_input{
+    display: none;
+}
+
+.genre_input:checked + .genre_label{
+    color: rgba(90, 207, 105, 0.7);
+}
+
+.genre_input ~ .genre_label{
+    color: whitesmoke;
+}
+
+.genre_label {
+    font-family: Georgi;
+    font-size: 19px;
+    display: block;
+    border: 0;
+    cursor: pointer;
+    background: rgba(0,0,0,.70);
+    border-radius: 8px;
+    padding: 13px 30px;
+}
+
+.genre_description {
+    font-family: Georgi;
+    font-size: 30px;
+    font-weight: bold;
+    color: white;
+    margin-bottom: 5vh;
+    margin-top: 5vh;
+}

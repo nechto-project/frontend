@@ -1,25 +1,25 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import MainLayout from "./layouts/main_layout/main_layout";
+import GreetingsScreen from './pages/greetings_screen/greetings_screen';
+import GenreScreen from './pages/genre_screen/genre_screen';
+import ParticipantScreen from './pages/participant_screen/participant_screen';
+import FilmsCardScreen from './pages/films_card_screen/films_card_screen';
+import JoinScreen from './pages/join_screen/join_screen';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<MainLayout/>}>
+          <Route index element={<GreetingsScreen/>}/>
+          <Route path="/genre" element={<GenreScreen/>}/>
+          <Route path="/participant" element={<ParticipantScreen/>}/>
+          <Route path="/films" element={<FilmsCardScreen/>}/>
+          <Route path="/join" element={<JoinScreen/>}/>
+        </Route>
+      </Routes>
+    </BrowserRouter>
   );
 }
 
