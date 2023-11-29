@@ -5,8 +5,6 @@ function ParticipantScreen(): JSX.Element {
     const navigate = useNavigate();
     const location = useLocation();
     const {isLeader , room} = location.state;
-    console.log(isLeader);
-    console.log(room);
 
     const handleLeaderClick = () => {
         navigate("/films", { state:{isLeader, room}});

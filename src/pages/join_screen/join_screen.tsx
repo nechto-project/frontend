@@ -5,11 +5,9 @@ function JoinScreen(): JSX.Element {
     const navigate = useNavigate();
     const location = useLocation();
     const {isLeader} = location.state;
-    console.log(isLeader);
     const [room, setInput] = useState('');
 
     const handleNotLeaderClick = () => {
-        console.log(room);
         navigate("/films", { state:{isLeader, room}});
     }
 

@@ -7,6 +7,7 @@ import ParticipantScreen from './pages/participant_screen/participant_screen';
 import FilmsCardScreen from './pages/films_card_screen/films_card_screen';
 import JoinScreen from './pages/join_screen/join_screen';
 import FinalScreen from './pages/final_screen/final_screen';
+import NotFoundScreen from './pages/not_found_page/not_found_page';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <Route path="/films" element={<FilmsCardScreen/>}/>
           <Route path="/join" element={<JoinScreen/>}/>
           <Route path="/final" element={<FinalScreen/>}/>
+          <Route path="*" element={<NotFoundScreen/>}/>
         </Route>
       </Routes>
     </BrowserRouter>

@@ -12,15 +12,23 @@ interface Film {
     directors: string[]
 }
 
-function FinalScreen() : JSX.Element {
+function FinalScreen(): JSX.Element {
     const location = useLocation();
-    const {film} = location.state;
+    const { room, film } = location.state;
 
-    return(
+
+    setTimeout(() =>fetch(`http://localhost:8081/room/delete/${room}`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json;charset=utf-8',
+        },
+    }), 20000);
+    return (
         <React.Fragment>
             <div className="film-card__wrap">
                 <div className="film-card__info">
-                        <FilmCard name={film.name} description={film.description} score={film.score} poster={film.poster} genres={film.genres} directors={film.directors} />
+                    <h2>Match!</h2>
+                    <FilmCard name={film.name} description={film.description} score={film.score} poster={film.poster} genres={film.genres} directors={film.directors} />
                 </div>
             </div>
         </React.Fragment>

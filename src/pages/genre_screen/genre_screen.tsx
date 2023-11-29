@@ -6,7 +6,6 @@ function GenreScreen(): JSX.Element {
     const location = useLocation();
     const navigate = useNavigate();
     const { isLeader } = location.state;
-    console.log(isLeader);
     let room: string;
 
     const handleLeaderClick = async () => {
@@ -22,11 +21,11 @@ function GenreScreen(): JSX.Element {
             .then((response) => response.text())
             .then((responseText) => {
                 room = responseText;
-                console.log(room);
                 navigate("/participant", { state: { isLeader: isLeader, room: room } });
             })
             .catch((error) => {
                 console.error(error);
+                navigate("/*");
             });
         
     };

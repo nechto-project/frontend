@@ -3,6 +3,7 @@ import { Link, useNavigate, useLocation } from "react-router-dom";
 import FilmCard from "../../components/logo/film_card/film_card";
 import { useEffect, useState } from "react";
 import FinalScreen from "../final_screen/final_screen";
+import NotFoundScreen from "../not_found_page/not_found_page";
 
 interface Film {
     movieId: number,
@@ -18,33 +19,32 @@ function FilmsCardScreen(): JSX.Element {
     const navigate = useNavigate();
     const location = useLocation();
     const { isLeader, room } = location.state;
+    const [film, setFilm] = useState<Film | null>(null);
 
-    const [film, setData] = useState<Film | null>(null);
 
-    
-        const fetchIsMatch = async () => {
-            console.log("runmatch")
-            try {
-                const response = await fetch(`http://localhost:8081/room/ismatch/${room}`);
-                const body: {isMatch: boolean, movie: Film} = await response.json();
-                console.log(body.isMatch);
-                if (!body.isMatch) {
-                    setTimeout(fetchIsMatch, 10000); 
+    const fetchIsMatch = () => {
+        fetch(`http://localhost:8081/room/ismatch/${room}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8',
+            },
+        })
+            .then((response) => response.json())
+            .then((responseJson: { isMatch: boolean, movie: Film }) => {
+                if (!responseJson.isMatch) {
+                    setTimeout(fetchIsMatch, 7000);
                 } else {
-                    setData(body.movie);
-                    fetch(`http://localhost:8081/room/delete/${room}`, {
-                        method: 'POST'});
-                    navigate("/final", { state:{film}});
-                    console.log(body.movie);
+                    setFilm(responseJson.movie);
                 }
-                console.log(film);
-            } catch (error) {
-                console.error('Error fetching data:', error);
-            }
-        };
-    
-    // console.log(isLeader);
-    // console.log(room);
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+    };
+
+    useEffect(() => {
+        film && navigate("/final", { state: { room, film } });
+    }, [film]);
 
     const [films, setFilms] = useState<Film[]>([]);
     const [currentFilmIndex, setCurrentFilmIndex] = useState<number>(0);
@@ -60,7 +60,6 @@ function FilmsCardScreen(): JSX.Element {
         NextFilm();
     }
     const handleRejectFilm = () => {
-        NextFilm();
         fetch(`http://localhost:8081/room/decision/${room}?isLeader=${isLeader}`, {
             method: 'POST',
             headers: {
@@ -68,6 +67,7 @@ function FilmsCardScreen(): JSX.Element {
             },
             body: JSON.stringify({ "idMovie": films[currentFilmIndex].movieId, "answer": false }),
         })
+        NextFilm();
     }
     function NextFilm() {
         if (currentFilmIndex < films.length - 1) {
@@ -94,7 +94,6 @@ function FilmsCardScreen(): JSX.Element {
     useEffect(() => {
         fetchData();
         fetchIsMatch();
-        console.log("run");
     }, []);
 
     return (
