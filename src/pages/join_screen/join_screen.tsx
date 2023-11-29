@@ -1,4 +1,4 @@
-import React from "react";
+import React , {useState} from "react";
 import { Link, useLocation, useNavigate} from 'react-router-dom';
 
 function JoinScreen(): JSX.Element {
@@ -6,9 +6,11 @@ function JoinScreen(): JSX.Element {
     const location = useLocation();
     const {isLeader} = location.state;
     console.log(isLeader);
+    const [room, setInput] = useState('');
 
     const handleNotLeaderClick = () => {
-        navigate("/films", { state:{isLeader}});
+        console.log(room);
+        navigate("/films", { state:{isLeader, room}});
     }
 
     return (
@@ -23,7 +25,7 @@ function JoinScreen(): JSX.Element {
                 </div>
                 <form className="start_match" >
                     <p>room code</p>
-                    <input className="btn btn_gray" type="text" />
+                    <input id="room_code" className="btn btn_gray" type="text" value={room} onInput={(e:React.ChangeEvent<HTMLInputElement>) => setInput(e.target.value)}/>
                     <div onClick={handleNotLeaderClick} typeof="submit" className="btn btn_botton btn_green">Continue</div>
                 </form>
             </div>

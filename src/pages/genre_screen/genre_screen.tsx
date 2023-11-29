@@ -1,16 +1,35 @@
 import React from "react";
-import {Link, useLocation, useNavigate} from "react-router-dom";
-import {Films} from "./const_genre";
+import { useLocation, useNavigate } from "react-router-dom";
+import { Films } from "./const_genre";
 
 function GenreScreen(): JSX.Element {
     const location = useLocation();
     const navigate = useNavigate();
-    const {isLeader} = location.state;
+    const { isLeader } = location.state;
     console.log(isLeader);
+    let room: string;
 
-    const handleLeaderClick = () => {
-        navigate("/participant", { state:{isLeader: true}});
-    }
+    const handleLeaderClick = async () => {
+        const checkboxes = document.querySelectorAll('input[name="genre"]:checked');
+        const data = Array.from(checkboxes).map((checkbox) => checkbox.id);
+        fetch('http://localhost:8081/room/create', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8',
+            },
+            body: JSON.stringify(data),
+        })
+            .then((response) => response.text())
+            .then((responseText) => {
+                room = responseText;
+                console.log(room);
+                navigate("/participant", { state: { isLeader: isLeader, room: room } });
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+        
+    };
 
     return (
         <React.Fragment>

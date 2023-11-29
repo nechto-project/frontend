@@ -3,7 +3,6 @@ import { useNavigate, Link } from 'react-router-dom';
 
 function GreetingsScreen(): JSX.Element {
     const navigate = useNavigate();
-
     const handleLeaderClick = () => {
         navigate("/genre", { state:{isLeader: true}});
     }

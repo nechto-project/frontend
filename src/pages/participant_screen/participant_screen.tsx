@@ -4,11 +4,12 @@ import { Link, useNavigate, useLocation } from 'react-router-dom';
 function ParticipantScreen(): JSX.Element {
     const navigate = useNavigate();
     const location = useLocation();
-    const {isLeader} = location.state;
+    const {isLeader , room} = location.state;
     console.log(isLeader);
+    console.log(room);
 
     const handleLeaderClick = () => {
-        navigate("/films", { state:{isLeader}});
+        navigate("/films", { state:{isLeader, room}});
     }
 
     const copyRoomCode = () => {
@@ -36,7 +37,7 @@ function ParticipantScreen(): JSX.Element {
                 <div className="part_buttons">
                     <div>
                         <p>room code</p>
-                        <div className="btn btn_gray">6fgn34c</div>
+                        <div className="btn btn_gray">{room}</div>
                     </div>
                     <div className="btn btn_gray" onClick={copyRoomCode}>
                         <img src="img/icon-copy.png" />
